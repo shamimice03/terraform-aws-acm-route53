@@ -8,7 +8,6 @@ resource "aws_acm_certificate" "cert" {
   }
 
   #tags = var.tags
-
 }
 
 
@@ -16,7 +15,6 @@ data "aws_route53_zone" "public_zone" {
   name         = var.hosted_zone_name
   private_zone = var.determine_zone_type
 }
-
 
 resource "aws_route53_record" "validation" {
   for_each = {
@@ -34,7 +32,6 @@ resource "aws_route53_record" "validation" {
   type            = each.value.type
   zone_id         = data.aws_route53_zone.public_zone.zone_id
 }
-
 
 resource "aws_acm_certificate_validation" "valid_cert" {
   certificate_arn         = aws_acm_certificate.cert.arn
