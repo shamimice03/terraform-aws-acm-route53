@@ -1,7 +1,7 @@
 variable "domain_name" {
   description = "Define Domain name"
   type        = string
-  default     = "webapp.kubecloud.net"
+  default     = "webapp.kubecloud.com"
 }
 
 variable "validation_method" {
@@ -13,7 +13,7 @@ variable "validation_method" {
 variable "hosted_zone_name" {
   description = "Define Hosted Zone Name"
   type        = string
-  default     = "kubecloud.net"
+  default     = "kubecloud.com"
 }
 
 variable "private_zone" {
