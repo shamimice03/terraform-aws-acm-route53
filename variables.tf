@@ -38,8 +38,6 @@ variable "tags" {
   }
 }
 
-
-
 variable "allow_record_overwrite" {
   description = "Determine Record Overwite"
   type        = bool
@@ -47,7 +45,7 @@ variable "allow_record_overwrite" {
 }
 
 variable "ttl" {
-  description = "Determine Record Overwite"
+  description = "Define ttl"
   type        = number
   default     = 60
 }
