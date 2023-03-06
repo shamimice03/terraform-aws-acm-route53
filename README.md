@@ -2,9 +2,9 @@
 
 ## Usage
 ```
-module "vpc" {
+module "acm" {
 
-source = "github.com/shamimice03/terraform-aws-vpc"
+source = "github.com/shamimice03/terraform-aws-acm-route53"
 
 domain_name = "webapp.kubecloud.net"
 validation_method = "DNS"
