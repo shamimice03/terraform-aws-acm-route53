@@ -2,18 +2,16 @@ resource "aws_acm_certificate" "cert" {
   domain_name       = var.domain_name
   validation_method = var.validation_method
 
-
   lifecycle {
     create_before_destroy = true
   }
-
   #tags = var.tags
 }
 
 
 data "aws_route53_zone" "public_zone" {
   name         = var.hosted_zone_name
-  private_zone = var.determine_zone_type
+  private_zone = var.private_zone
 }
 
 resource "aws_route53_record" "validation" {

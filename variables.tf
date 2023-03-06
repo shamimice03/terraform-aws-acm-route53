@@ -16,7 +16,7 @@ variable "hosted_zone_name" {
   default     = "kubecloud.net"
 }
 
-variable "determine_zone_type" {
+variable "private_zone" {
   description = "Determine Zone Type"
   type        = bool
   default     = false  
