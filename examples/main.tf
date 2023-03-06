@@ -1,6 +1,6 @@
-module "acm" {
-
-    source = "github.com/shamimice03/terraform-aws-acm-route53"
+module "acm-route53" {
+    
+    source  = "shamimice03/acm-route53/aws"
 
     domain_name = "webapp.example.com"
     validation_method = "DNS"
