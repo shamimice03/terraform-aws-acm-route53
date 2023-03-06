@@ -1,4 +1,3 @@
-# Make it an arry
 resource "aws_acm_certificate" "cert" {
   domain_name       = var.domain_name
   validation_method = var.validation_method
@@ -7,16 +6,15 @@ resource "aws_acm_certificate" "cert" {
   lifecycle {
     create_before_destroy = true
   }
-  
-  tags = {
-    Environment = "test"
-  }
+
+  #tags = var.tags
+
 }
 
 
 data "aws_route53_zone" "public_zone" {
-  name         = "kubecloud.net"
-  private_zone = false
+  name         = var.hosted_zone_name
+  private_zone = var.determine_zone_type
 }
 
 
@@ -29,10 +27,10 @@ resource "aws_route53_record" "validation" {
     }
   }
 
-  allow_overwrite = true
+  allow_overwrite = var.allow_record_overwrite # bool
   name            = each.value.name
   records         = [each.value.record]
-  ttl             = 60
+  ttl             = var.ttl
   type            = each.value.type
   zone_id         = data.aws_route53_zone.public_zone.zone_id
 }
