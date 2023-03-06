@@ -8,7 +8,6 @@ resource "aws_acm_certificate" "cert" {
   tags = var.tags
 }
 
-
 data "aws_route53_zone" "public_zone" {
   name         = var.hosted_zone_name
   private_zone = var.private_zone
