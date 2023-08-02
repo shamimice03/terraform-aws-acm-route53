@@ -1,7 +1,7 @@
 ## Request SSL/TLS Certficate
 
 ## Usage
-```
+```hcl
 module "acm-route53" {
    
     source  = "shamimice03/acm-route53/aws"
