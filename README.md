@@ -2,7 +2,7 @@
 
 ## Usage
 ```hcl
-module "acm-route53" {
+module "acm_route53" {
    
     source  = "shamimice03/acm-route53/aws"
 
