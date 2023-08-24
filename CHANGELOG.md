@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [1.0.5](https://github.com/shamimice03/terraform-aws-acm-route53/compare/v1.0.4...v1.0.5) (2023-08-24)
+
+
+### Bug Fixes
+
+* **variable-updated:** updated variables and docs ([0a186df](https://github.com/shamimice03/terraform-aws-acm-route53/commit/0a186df3fce5815983d8d144586ef56f98468893))
+
 ### [1.0.4](https://github.com/shamimice03/terraform-aws-acm-route53/compare/v1.0.3...v1.0.4) (2023-08-24)
 
 
