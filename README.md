@@ -15,7 +15,6 @@ module "acm-route53" {
     tags = {
         "Name" = "ssl-cert"
     }
-
 }
 ```
 
