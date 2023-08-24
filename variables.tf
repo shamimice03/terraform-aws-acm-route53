@@ -1,11 +1,11 @@
 variable "domain_name" {
   description = "Define Domain name"
   type        = string
-  default     = "webapp.kubecloud.com"
+  default     = ""
 }
 
 variable "validation_method" {
-  description = "Define Validation Method"
+  description = "Define Validation Method. `DNS` or `EMAIL`"
   type        = string
   default     = "DNS" ## DNS or EMAIL
 }
@@ -13,21 +13,13 @@ variable "validation_method" {
 variable "hosted_zone_name" {
   description = "Define Hosted Zone Name"
   type        = string
-  default     = "kubecloud.com"
+  default     = ""
 }
 
 variable "private_zone" {
-  description = "Determine Zone Type"
+  description = "Determine Zone Type. `false` leads to `public zone` and `true` for `private zone`"
   type        = bool
-  default     = false  
-  # false = public zone
-  # true = private zone
-}
-
-variable "allow_create_before_destroy_policy" {
-  description = "Define Create Before Destroy Lifecycle Policy"
-  type        = bool
-  default     = true
+  default     = false
 }
 
 variable "tags" {

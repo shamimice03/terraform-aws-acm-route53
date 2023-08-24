@@ -22,7 +22,7 @@ resource "aws_route53_record" "validation" {
     }
   }
 
-  allow_overwrite = var.allow_record_overwrite 
+  allow_overwrite = var.allow_record_overwrite
   name            = each.value.name
   records         = [each.value.record]
   ttl             = var.ttl
