@@ -1,3 +1,4 @@
+# Generate certificates
 resource "aws_acm_certificate" "cert" {
   count             = var.create ? length(var.domain_names) : 0
   domain_name       = var.domain_names[count.index]
@@ -9,12 +10,14 @@ resource "aws_acm_certificate" "cert" {
   tags = var.tags
 }
 
+# Retrieve hosted zone info
 data "aws_route53_zone" "public_zone" {
   count        = var.create ? 1 : 0
   name         = var.hosted_zone_name
   private_zone = var.private_zone
 }
 
+# Certificate validation
 resource "aws_route53_record" "validation" {
   for_each = {
     for cert in aws_acm_certificate.cert : cert.domain_name => {

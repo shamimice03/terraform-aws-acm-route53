@@ -3,28 +3,69 @@
 ## Usage
 ```hcl
 module "acm_route53" {
-
     source  = "shamimice03/acm-route53/aws"
 
-    domain_name = "webapp.example.com"
-    validation_method = "DNS"
-    hosted_zone_name = "example.com"
-    private_zone = false
+    create = true
+    domain_names = [
+        "awsref.kubecloud.net",
+        "www.awsref.kubecloud.net",
+    ]
+    hosted_zone_name       = "kubecloud.net"
+    private_zone           = false
+    validation_method      = "DNS"
     allow_record_overwrite = true
-    ttl = 60
+    ttl                    = 60
     tags = {
         "Name" = "ssl-cert"
     }
 }
 ```
 
+## How to use:
+```hcl
+module "acm_route53" {
+  source = "shamimice03/acm-route53/aws"
+
+  create = true
+  domain_names = [
+    "awsref.kubecloud.net",
+    "www.awsref.kubecloud.net",
+  ]
+  ...
+  ...
+}
+
+module "alb" {
+  source  = "terraform-aws-modules/alb/aws"
+  version = "8.7.0"
+
+  create_lb          = true
+  load_balancer_type = "application"
+
+  # skipped for brevity
+  target_groups = [...]
+
+  https_listeners = [
+    {
+      port               = 443
+      protocol           = "HTTPS"
+      certificate_arn    = module.acm_route53.domain_certificate_arns["awsref.kubecloud.net"] # <-------
+      action_type        = "forward"
+      target_group_index = 0
+    }
+  ]
+
+  # ... omitted
+}
+```
+Details on #/examples/complete
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.0.0 |
 
 ## Providers

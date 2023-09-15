@@ -188,3 +188,44 @@ I want this:
     "www.awsref.kubecloud.net": "arn:aws:acm:ap-northeast-1:391178969547:certificate/55cda95d-693a-43da-a011-ea0b45f82e43",
 }
 ```
+
+
+```hcl
+module "acm_route53" {
+  source = "../../"
+
+  create = true
+  domain_names = [
+    "awsref.kubecloud.net",
+    "www.awsref.kubecloud.net",
+  ]
+  ...
+  ...
+}
+...
+...
+module "alb" {
+  source  = "terraform-aws-modules/alb/aws"
+  version = "8.7.0"
+
+  create_lb          = true
+  load_balancer_type = "application"
+  ...
+
+  target_groups = [...]
+
+  https_listeners = [
+    {
+      port               = 443
+      protocol           = "HTTPS"
+      certificate_arn    = module.acm_route53.domain_certificate_arns["awsref.kubecloud.net"] #<------------
+      action_type        = "forward"
+      target_group_index = 0
+    }
+  ]
+
+  ...
+  ...
+}
+
+```

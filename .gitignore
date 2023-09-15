@@ -9,6 +9,9 @@ Notes.md
 # Terraform lockfile
 .terraform.lock.hcl
 
+# tfvars
+*tfvars
+
 # .tfstate files
 *.tfstate
 *.tfstate.*
