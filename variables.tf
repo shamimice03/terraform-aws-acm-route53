@@ -1,7 +1,13 @@
-variable "domain_name" {
+variable "create" {
+  description = "Controls if certificate should be generated"
+  type        = bool
+  default     = true
+}
+
+variable "domain_names" {
   description = "Define Domain name"
-  type        = string
-  default     = ""
+  type        = list(string)
+  default     = []
 }
 
 variable "validation_method" {
@@ -25,9 +31,7 @@ variable "private_zone" {
 variable "tags" {
   description = "Define Tags"
   type        = map(any)
-  default = {
-    "Name" = "ssl-cert"
-  }
+  default     = {}
 }
 
 variable "allow_record_overwrite" {
