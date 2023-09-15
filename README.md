@@ -58,7 +58,7 @@ module "alb" {
   # ... omitted
 }
 ```
-Details on #/examples/complete
+Details on #[/examples/complete/]
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
@@ -108,7 +108,7 @@ No modules.
 | <a name="output_domain_certificate_arns"></a> [domain\_certificate\_arns](#output\_domain\_certificate\_arns) | domain with certificate arn |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
-## Outputs Pattern:
+## Outputs format:
 ```hcl
 certificate_arns = [
   "arn:aws:acm:ap-northeast-1:...",
