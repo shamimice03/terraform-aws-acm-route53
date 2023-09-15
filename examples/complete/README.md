@@ -16,7 +16,10 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_acm_route53"></a> [acm\_route53](#module\_acm\_route53) | shamimice03/acm-route53/aws | n/a |
+| <a name="module_acm_route53"></a> [acm\_route53](#module\_acm\_route53) | ../../ | n/a |
+| <a name="module_alb"></a> [alb](#module\_alb) | terraform-aws-modules/alb/aws | 8.7.0 |
+| <a name="module_alb_sg"></a> [alb\_sg](#module\_alb\_sg) | terraform-aws-modules/security-group/aws | 5.1.0 |
+| <a name="module_vpc"></a> [vpc](#module\_vpc) | shamimice03/vpc/aws | 1.2.1 |
 
 ## Resources
 

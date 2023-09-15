@@ -3,7 +3,7 @@
 ## Usage
 ```hcl
 module "acm_route53" {
-   
+
     source  = "shamimice03/acm-route53/aws"
 
     domain_name = "webapp.example.com"
@@ -31,7 +31,7 @@ module "acm_route53" {
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.13.1 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.17.0 |
 
 ## Modules
 
@@ -51,7 +51,8 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_allow_record_overwrite"></a> [allow\_record\_overwrite](#input\_allow\_record\_overwrite) | Determine Record Overwite | `bool` | `true` | no |
-| <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | Define Domain name | `string` | `""` | no |
+| <a name="input_create"></a> [create](#input\_create) | Controls if certificate should be generated | `bool` | `true` | no |
+| <a name="input_domain_names"></a> [domain\_names](#input\_domain\_names) | Define Domain name | `list(string)` | `[]` | no |
 | <a name="input_hosted_zone_name"></a> [hosted\_zone\_name](#input\_hosted\_zone\_name) | Define Hosted Zone Name | `string` | `""` | no |
 | <a name="input_private_zone"></a> [private\_zone](#input\_private\_zone) | Determine Zone Type. `false` leads to `public zone` and `true` for `private zone` | `bool` | `false` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Define Tags | `map(any)` | <pre>{<br>  "Name": "ssl-cert"<br>}</pre> | no |
@@ -62,5 +63,6 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_certificate_arn"></a> [certificate\_arn](#output\_certificate\_arn) | certificate arn |
+| <a name="output_certificate_arns"></a> [certificate\_arns](#output\_certificate\_arns) | certificate arns |
+| <a name="output_domain_certificate_arns"></a> [domain\_certificate\_arns](#output\_domain\_certificate\_arns) | domain with certificate arn |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

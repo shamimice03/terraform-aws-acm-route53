@@ -1,6 +1,11 @@
 # Local .terraform directories
 **/.terraform/*
 
+# Notes
+NOTES.md
+notes.md
+Notes.md
+
 # Terraform lockfile
 .terraform.lock.hcl
 

@@ -1,5 +1,6 @@
 resource "aws_acm_certificate" "cert" {
-  domain_name       = var.domain_name
+  count             = var.create ? length(var.domain_names) : 0
+  domain_name       = var.domain_names[count.index]
   validation_method = var.validation_method
 
   lifecycle {
@@ -9,28 +10,40 @@ resource "aws_acm_certificate" "cert" {
 }
 
 data "aws_route53_zone" "public_zone" {
+  count        = var.create ? 1 : 0
   name         = var.hosted_zone_name
   private_zone = var.private_zone
 }
 
 resource "aws_route53_record" "validation" {
   for_each = {
-    for dvo in aws_acm_certificate.cert.domain_validation_options : dvo.domain_name => {
-      name   = dvo.resource_record_name
-      record = dvo.resource_record_value
-      type   = dvo.resource_record_type
+    for cert in aws_acm_certificate.cert : cert.domain_name => {
+      name   = tolist(cert.domain_validation_options)[0].resource_record_name
+      record = tolist(cert.domain_validation_options)[0].resource_record_value
+      type   = tolist(cert.domain_validation_options)[0].resource_record_type
     }
   }
 
-  allow_overwrite = var.allow_record_overwrite
   name            = each.value.name
   records         = [each.value.record]
-  ttl             = var.ttl
   type            = each.value.type
-  zone_id         = data.aws_route53_zone.public_zone.zone_id
+  allow_overwrite = var.allow_record_overwrite
+  ttl             = var.ttl
+  zone_id         = data.aws_route53_zone.public_zone[0].zone_id
+}
+
+locals {
+  certificate_arns = {
+    for cert in aws_acm_certificate.cert : cert.domain_name => cert.arn
+  }
+
+  fqdns = {
+    for key, record in aws_route53_record.validation : key => record.fqdn
+  }
 }
 
 resource "aws_acm_certificate_validation" "valid_cert" {
-  certificate_arn         = aws_acm_certificate.cert.arn
-  validation_record_fqdns = [for record in aws_route53_record.validation : record.fqdn]
+  count                   = var.create ? length(var.domain_names) : 0
+  certificate_arn         = local.certificate_arns[var.domain_names[count.index]]
+  validation_record_fqdns = [local.fqdns[var.domain_names[count.index]]]
 }
