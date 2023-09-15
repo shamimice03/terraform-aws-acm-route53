@@ -31,7 +31,7 @@ module "acm_route53" {
     "awsref.kubecloud.net",
     "www.awsref.kubecloud.net",
   ]
-  
+
   # ... omitted
 }
 
@@ -49,7 +49,7 @@ module "alb" {
     {
       port               = 443
       protocol           = "HTTPS"
-      certificate_arn    = module.acm_route53.domain_certificate_arns["awsref.kubecloud.net"]  # <------ 
+      certificate_arn    = module.acm_route53.domain_certificate_arns["awsref.kubecloud.net"]  # <------
       action_type        = "forward"
       target_group_index = 0
     }
