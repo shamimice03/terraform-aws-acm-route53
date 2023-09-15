@@ -58,7 +58,7 @@ module "alb" {
   # ... omitted
 }
 ```
-Details on #[/examples/complete/](./examples/)
+Details on [/examples/complete/](./examples/)
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
