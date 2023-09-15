@@ -31,9 +31,7 @@ variable "private_zone" {
 variable "tags" {
   description = "Define Tags"
   type        = map(any)
-  default = {
-    "Name" = "ssl-cert"
-  }
+  default     = {}
 }
 
 variable "allow_record_overwrite" {

@@ -31,8 +31,8 @@ module "acm_route53" {
     "awsref.kubecloud.net",
     "www.awsref.kubecloud.net",
   ]
-  ...
-  ...
+  
+  # ... omitted
 }
 
 module "alb" {
@@ -49,7 +49,7 @@ module "alb" {
     {
       port               = 443
       protocol           = "HTTPS"
-      certificate_arn    = module.acm_route53.domain_certificate_arns["awsref.kubecloud.net"] # <-------
+      certificate_arn    = module.acm_route53.domain_certificate_arns["awsref.kubecloud.net"]  # <------ 
       action_type        = "forward"
       target_group_index = 0
     }
@@ -96,7 +96,7 @@ No modules.
 | <a name="input_domain_names"></a> [domain\_names](#input\_domain\_names) | Define Domain name | `list(string)` | `[]` | no |
 | <a name="input_hosted_zone_name"></a> [hosted\_zone\_name](#input\_hosted\_zone\_name) | Define Hosted Zone Name | `string` | `""` | no |
 | <a name="input_private_zone"></a> [private\_zone](#input\_private\_zone) | Determine Zone Type. `false` leads to `public zone` and `true` for `private zone` | `bool` | `false` | no |
-| <a name="input_tags"></a> [tags](#input\_tags) | Define Tags | `map(any)` | <pre>{<br>  "Name": "ssl-cert"<br>}</pre> | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | Define Tags | `map(any)` | `{}` | no |
 | <a name="input_ttl"></a> [ttl](#input\_ttl) | Define ttl | `number` | `60` | no |
 | <a name="input_validation_method"></a> [validation\_method](#input\_validation\_method) | Define Validation Method. `DNS` or `EMAIL` | `string` | `"DNS"` | no |
 
@@ -107,3 +107,16 @@ No modules.
 | <a name="output_certificate_arns"></a> [certificate\_arns](#output\_certificate\_arns) | certificate arns |
 | <a name="output_domain_certificate_arns"></a> [domain\_certificate\_arns](#output\_domain\_certificate\_arns) | domain with certificate arn |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+
+## Outputs Pattern:
+```hcl
+certificate_arns = [
+  "arn:aws:acm:ap-northeast-1:...",
+  "arn:aws:acm:ap-northeast-1:...",
+]
+
+domain_certificate_arns = {
+  "awsref.kubecloud.net" = "arn:aws:acm:ap-northeast-1:..."
+  "www.awsref.kubecloud.net" = "arn:aws:acm:ap-northeast-1:..."
+}
+```
